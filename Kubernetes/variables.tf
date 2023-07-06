@@ -1,5 +1,5 @@
 variable "agent_count" {
-  default = 3
+  default = 2 
 }
 
 # The following two variable declarations are placeholder references.
