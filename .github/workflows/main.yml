@@ -1,0 +1,2 @@
+- name: Create AKS Cluster
+  uses: Azure/aks-create-action@1.1
