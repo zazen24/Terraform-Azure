@@ -1,12 +1,12 @@
 name: AKS deploy
 
-on:
-  push:
+#on:
+#  push:
     branches: [ main ]
-  pull_request:
+#  pull_request:
     branches: [ main ]
 
-jobs:
+#jobs:
 
   aks:
     name: "run on aks"
