@@ -2,8 +2,8 @@
 #   prefix = var.resource_group_name_prefix
 # }
 
-resource "azurerm_resource_group" "rg" {
-  location = "australiaeast"
-  name     = "AKS-rg"
-  
-}
+# resource "azurerm_resource_group" "rg" {
+#   location = "australiaeast"
+#   name     = "AKS-rg"
+
+# }
