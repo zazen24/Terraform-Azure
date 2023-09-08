@@ -1,4 +1,4 @@
-name: 'Terraform' cleaning resources
+name: 'Terraform cleaning resources'
 
 on: 
   workflow_dispatch:
