@@ -41,6 +41,7 @@ jobs:
         RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP_NAME }}
         STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT_NAME }}
         CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
+      if: github.event_name == 'pull_request'
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
 
@@ -87,7 +88,8 @@ jobs:
 
       # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.event_name == 'pull_request'
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
