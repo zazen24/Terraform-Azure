@@ -18,7 +18,7 @@ terraform {
 #       container_name       = tfstate-chet
 #       key                  = "terraform.tfstate"
 #   }
-# }
+ }
 
 provider "azurerm" {
   features {}
