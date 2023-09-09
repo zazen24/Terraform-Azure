@@ -12,12 +12,12 @@ terraform {
       version = "~>3.0"
     }
   }
-#   backend "azurerm" {
+  backend "azurerm" {
 #       resource_group_name  = "tfstate"
 #       storage_account_name = "tfstateforchet"
 #       container_name       = tfstate-chet
-#       key                  = "terraform.tfstate"
-#   }
+      key                  = "terraform.tfstate"
+   }
  }
 
 provider "azurerm" {
