@@ -3,7 +3,7 @@ name: 'Terraform Provisioning'
 on: [push, pull_request]
 
 env:
-  TF_LOG: debug
+  TF_LOG: INFO
 
 jobs:
   terraform:
