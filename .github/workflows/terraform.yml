@@ -43,10 +43,10 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP_NAME }}
-        #STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT_NAME }}
-        STORAGE_ACCOUNT: tfstateforchet
-        #CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
-        CONTAINER_NAME: tfstate-chet
+        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT_NAME }}
+        #STORAGE_ACCOUNT: tfstateforchet
+        CONTAINER_NAME: ${{ secrets.STORAGE_CONTAINER_NAME }}
+        #CONTAINER_NAME: tfstate-chet
         ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
       #if: github.event_name == 'pull_request'
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
