@@ -33,7 +33,7 @@ jobs:
       id: fmt
       run: terraform fmt -check
       continue-on-error: true
-      
+
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -67,6 +67,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       if: github.event_name == 'pull_request'
       run: terraform plan -no-color
+    
     
     # Add a comment to pull requests with plan results
     - name: add-plan-comment
