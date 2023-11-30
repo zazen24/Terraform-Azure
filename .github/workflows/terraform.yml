@@ -69,6 +69,7 @@ jobs:
       run: terraform plan -no-color
     
 
+
     # Add a comment to pull requests with plan results
     - name: add-plan-comment
       id: comment
