@@ -100,8 +100,6 @@ jobs:
             body: output
           })
 
-
-
       # On push to main, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
