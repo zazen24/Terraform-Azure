@@ -2,6 +2,10 @@ name: 'Terraform Provisioning'
 
 on: [push, pull_request]
 
+permissions:
+      id-token: write
+      contents: read
+
 env:
   TF_LOG: INFO
 
