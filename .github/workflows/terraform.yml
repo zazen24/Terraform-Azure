@@ -130,6 +130,4 @@ jobs:
         kubectl get service store-front
         rm -rf ~/.kube
 
-      
-
-
+    
