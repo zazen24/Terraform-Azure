@@ -111,8 +111,8 @@ jobs:
       run: terraform apply -auto-approve
 
 
-    - name: Terraform output
-      run: terraform output
+    # - name: Terraform output
+    #   run: terraform output
 
    
     - name: Deploy Application
