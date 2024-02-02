@@ -118,12 +118,12 @@ jobs:
     # - name: Terraform output
     #   run: terraform output
     - name: 'Az CLI login'
-      uses: azure/login@v1.4.7
+      uses: azure/login
       with:
-        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
        # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        tenant-id: ${{ secrets.ARM_TENANT_ID }}
-        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        #tenant-id: ${{ secrets.ARM_TENANT_ID }}
+        #subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
    
     - name: Deploy Application
