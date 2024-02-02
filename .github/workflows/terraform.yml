@@ -118,7 +118,7 @@ jobs:
     # - name: Terraform output
     #   run: terraform output
     - name: 'Az CLI login'
-      uses: azure/login
+      uses: azure/login@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
        # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
