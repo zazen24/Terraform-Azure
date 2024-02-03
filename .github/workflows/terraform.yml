@@ -129,7 +129,7 @@ jobs:
    
     - name: Deploy Application
       run: |
-        az aks get-credentials -n "cluster-bursting-jennet" -g "AKS-ResourceGroup"
+        az aks get-credentials -n "learnk8scluster" -g "AKS-ResourceGroup"
         kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
         sleep 40
         kubectl get service store-front
