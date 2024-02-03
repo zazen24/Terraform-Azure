@@ -104,16 +104,16 @@ jobs:
           })
 
 
-      # On push to main, build or change infrastructure according to Terraform configuration files
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   #if: github.event_name == 'pull_request'
-    #   env:
-    #     ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-    #     ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-    #     ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-    #     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-    #   run: terraform apply -auto-approve
+      #On push to main, build or change infrastructure according to Terraform configuration files
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #if: github.event_name == 'pull_request'
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      run: terraform apply -auto-approve
 
 
     # - name: Terraform output
@@ -122,9 +122,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
-       # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        #tenant-id: ${{ secrets.ARM_TENANT_ID }}
-        #subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      
 
    
     - name: Deploy Application
