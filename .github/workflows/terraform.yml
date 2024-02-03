@@ -102,18 +102,18 @@ jobs:
             repo: context.repo.repo,
             body: output
           })
-          
+
 
       # On push to main, build or change infrastructure according to Terraform configuration files
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #if: github.event_name == 'pull_request'
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: terraform apply -auto-approve
+    # - name: Terraform Apply
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   #if: github.event_name == 'pull_request'
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+    #     ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    #   run: terraform apply -auto-approve
 
 
     # - name: Terraform output
@@ -129,7 +129,7 @@ jobs:
    
     - name: Deploy Application
       run: |
-        az aks get-credentials -n "cluster-bursting-jennet" -g "rg-refined-swine"
+        az aks get-credentials -n "cluster-bursting-jennet" -g "AKS-ResourceGroup"
         kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
         sleep 40
         kubectl get service store-front
