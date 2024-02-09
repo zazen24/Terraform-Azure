@@ -127,12 +127,16 @@ jobs:
       
 
    
-    - name: Deploy Application
-      run: |
-        az aks get-credentials -n "learnk8scluster" -g "AKS-ResourceGroup"
-        kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
-        sleep 40
-        kubectl get service store-front
-        rm -rf ~/.kube
+    # - name: Deploy Application
+    #   run: |
+    #     az aks get-credentials -n "learnk8scluster" -g "AKS-ResourceGroup"
+    #     kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
+    #     sleep 40
+    #     kubectl get service store-front
+    #     rm -rf ~/.kube
 
+
+    - name: Attach ACR to AKS cluster
+      run: |
+        az aks update -n "learnk8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
     
