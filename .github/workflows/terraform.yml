@@ -136,7 +136,9 @@ jobs:
     #     rm -rf ~/.kube
 
 
-    - name: Attach ACR to AKS cluster
-      run: |
-        az aks update -n "learnk8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
+
+    #Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
+    # - name: Attach ACR to AKS cluster
+    #   run: |
+    #     az aks update -n "learnk8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
     
