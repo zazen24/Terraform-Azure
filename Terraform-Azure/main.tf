@@ -23,6 +23,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "learnk8scluster"
+  kubernetes_version = "1.29.2"
 
   default_node_pool {
     name       = "default"
@@ -38,7 +39,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     type = "SystemAssigned"
   }
 }
-
 
 
 
