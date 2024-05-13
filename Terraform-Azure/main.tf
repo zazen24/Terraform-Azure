@@ -3,7 +3,7 @@
 # }
 
 resource "azurerm_resource_group" "rg" {
-  location = "northcentralus"
+  location = "eastus"
   name     = "AKS-ResourceGroup"
 
 }
@@ -38,6 +38,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     type = "SystemAssigned"
   }
 }
+
 
 
 # resource "azurerm_role_assignment" "example" {
