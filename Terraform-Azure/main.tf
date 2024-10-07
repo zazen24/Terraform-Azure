@@ -14,6 +14,7 @@ resource "azurerm_resource_group" "ag-rg" {
 
 }
 
+
 resource "azurerm_public_ip" "app_gateway_ip" {
   name                = "app-gateway-ip"
   location            = azurerm_resource_group.ag-rg.location
