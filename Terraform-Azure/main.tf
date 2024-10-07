@@ -18,6 +18,7 @@ resource "azurerm_container_registry" "acr" {
 }
 
 
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name                = "learnk8scluster"
   location            = azurerm_resource_group.rg.location
