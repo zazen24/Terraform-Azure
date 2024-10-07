@@ -14,6 +14,15 @@ resource "azurerm_resource_group" "ag-rg" {
 
 }
 
+resource "azurerm_public_ip" "app_gateway_ip" {
+  name                = "app-gateway-ip"
+  location            = azurerm_resource_group.ag-rg.location
+  resource_group_name = azurerm_resource_group.ag-rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+
 resource "azurerm_container_registry" "acr" {
   name                = "DemooACRchet"
   resource_group_name = azurerm_resource_group.rg.name
@@ -47,13 +56,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 }
 
-resource "azurerm_public_ip" "app_gateway_ip" {
-  name                = "app-gateway-ip"
-  location            = azurerm_resource_group.ag-rg.location
-  resource_group_name = azurerm_resource_group.ag-rg.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
 
 
 
