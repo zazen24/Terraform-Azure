@@ -8,20 +8,48 @@ resource "azurerm_resource_group" "rg" {
 
 }
 
-resource "azurerm_resource_group" "ag-rg" {
+resource "azurerm_resource_group" "resource_group_AG" {
   location = "eastus2"
   name     = "AG-ResourceGroup"
 
 }
+resource "azurerm_resource_group" "resource_group_AKS" {
+  location = "eastus2"
+  name     = "AKS-ResourceGroup"
+
+}
+
+resource "azurerm_virtual_network" "virtual_network" {
+  name     = "vnet"
+  resource_group_name = azurerm_resource_group.rg.name
+  location = "eastus2"
+  address_space = ["192.168.0.0./16"]
+  
+}
 
 
-# resource "azurerm_public_ip" "app_gateway_ip" {
-#   name                = "app-gateway-ip"
-#   location            = azurerm_resource_group.ag-rg.location
-#   resource_group_name = azurerm_resource_group.ag-rg.name
-#   allocation_method   = "Static"
-#   sku                 = "Standard"
-# }
+
+resource "azurerm_subnet" "AG_subnet" {
+  name                 = "AG-subnet"
+  resource_group_name  = azurerm_resource_group.resource_group_AG.name
+  virtual_network_name = azurerm_virtual_network.virtual_network.name
+  address_prefixes     = ["192.168.0.0/24"]
+}
+
+resource "azurerm_subnet" "AKS_subnet" {
+  name                 = "AKS-subnet"
+  resource_group_name  = azurerm_resource_group.resource_group_AKS.name
+  virtual_network_name = azurerm_virtual_network.virtual_network.name
+  address_prefixes     = ["192.168.0.1/24"]
+}
+
+resource "azurerm_public_ip" "AKS_subnet" {
+  name                = "app-gateway-ip"
+  location            = azurerm_resource_group.ag-rg.location
+  resource_group_name = azurerm_resource_group.ag-rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
 
 
 resource "azurerm_container_registry" "acr" {
@@ -35,9 +63,9 @@ resource "azurerm_container_registry" "acr" {
 
 
 resource "azurerm_kubernetes_cluster" "cluster" {
-  name                = "learnk8scluster"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                = "k8scluster"
+  location            = azurerm_resource_group.resource_group_AKS.location
+  resource_group_name = azurerm_resource_group.resource_group_AKS.name
   dns_prefix          = "learnk8scluster"
   kubernetes_version = "1.29.2"
   
@@ -64,27 +92,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
 
 
-resource "azurerm_virtual_network" "example" {
-  name                = "app-gateway-network"
-  resource_group_name = azurerm_resource_group.ag-rg.name
-  location            = azurerm_resource_group.ag-rg.location
-  address_space       = ["10.254.0.0/16"]
-}
 
-resource "azurerm_subnet" "example" {
-  name                 = "app-gateway-subnet"
-  resource_group_name  = azurerm_resource_group.ag-rg.name
-  virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.254.0.0/24"]
-}
 
-resource "azurerm_public_ip" "example" {
-  name                = "AG-pip"
-  resource_group_name = azurerm_resource_group.ag-rg.name
-  location            = azurerm_resource_group.ag-rg.location
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
 
 # since these variables are re-used - a locals block makes this more maintainable
 locals {
@@ -98,9 +107,9 @@ locals {
 }
 
 resource "azurerm_application_gateway" "network" {
-  name                = "example-appgateway"
-  resource_group_name = azurerm_resource_group.ag-rg.name
-  location            = azurerm_resource_group.ag-rg.location
+  name                = "appgatewayfork8"
+  resource_group_name = azurerm_resource_group.resource_group_AG.name
+  location            = azurerm_resource_group.resource_group_AG.location
 
   sku {
     name     = "Standard_v2"
@@ -110,7 +119,7 @@ resource "azurerm_application_gateway" "network" {
 
   gateway_ip_configuration {
     name      = "my-gateway-ip-configuration"
-    subnet_id = azurerm_subnet.example.id
+    subnet_id = azurerm_subnet.AG_subnet.id
   }
 
   frontend_port {
