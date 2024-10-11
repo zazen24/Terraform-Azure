@@ -25,14 +25,14 @@ resource "azurerm_virtual_network" "virtual_network" {
 
 resource "azurerm_subnet" "AG_subnet" {
   name                 = "AG-subnet"
-  resource_group_name  = azurerm_resource_group.resource_group_AG.name
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   address_prefixes     = ["192.168.0.0/24"]
 }
 
 resource "azurerm_subnet" "AKS_subnet" {
   name                 = "AKS-subnet"
-  resource_group_name  = azurerm_resource_group.resource_group_AKS.name
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
   address_prefixes     = ["192.168.1.0/24"]
 }
