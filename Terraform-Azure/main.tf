@@ -37,6 +37,7 @@ resource "azurerm_subnet" "AKS_subnet" {
   address_prefixes     = ["192.168.1.0/24"]
 }
 
+
 # resource "azurerm_public_ip" "AKS_subnet" {
 #   name                = "app-gateway-ip"
 #   location            = azurerm_resource_group.ag-rg.location
