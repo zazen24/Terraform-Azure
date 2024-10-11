@@ -27,8 +27,6 @@ resource "azurerm_virtual_network" "virtual_network" {
   
 }
 
-
-
 resource "azurerm_subnet" "AG_subnet" {
   name                 = "AG-subnet"
   resource_group_name  = azurerm_resource_group.resource_group_AG.name
@@ -40,7 +38,7 @@ resource "azurerm_subnet" "AKS_subnet" {
   name                 = "AKS-subnet"
   resource_group_name  = azurerm_resource_group.resource_group_AKS.name
   virtual_network_name = azurerm_virtual_network.virtual_network.name
-  address_prefixes     = ["192.168.0.1/24"]
+  address_prefixes     = ["192.168.1.0/24"]
 }
 
 # resource "azurerm_public_ip" "AKS_subnet" {
@@ -75,6 +73,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     node_count = "1"
     #vm_size    = "standard_d2_v2"
     vm_size    = "standard_B2s"
+    vnet_subnet_id = azurerm_subnet.AKS_subnet.id
   }
   network_profile {
     network_plugin    = "kubenet"
@@ -83,29 +82,15 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   identity {
     type = "SystemAssigned"
   }
+
+  ingress_application_gateway {
+    gateway_name = "appgatewayfork8"
+    subnet_id    = azurerm_subnet.AG_subnet.id
+  }
   
 }
 
 
-
-##create a application gateway and associate it with the kubernetes cluster
-
-
-
-
-
-
-
-# since these variables are re-used - a locals block makes this more maintainable
-# locals {
-#   backend_address_pool_name      = "${azurerm_virtual_network.example.name}-beap"
-#   frontend_port_name             = "${azurerm_virtual_network.example.name}-feport"
-#   frontend_ip_configuration_name = "${azurerm_virtual_network.example.name}-feip"
-#   http_setting_name              = "${azurerm_virtual_network.example.name}-be-htst"
-#   listener_name                  = "${azurerm_virtual_network.example.name}-httplstn"
-#   request_routing_rule_name      = "${azurerm_virtual_network.example.name}-rqrt"
-#   redirect_configuration_name    = "${azurerm_virtual_network.example.name}-rdrcfg"
-# }
 
 # resource "azurerm_application_gateway" "network" {
 #   name                = "appgatewayfork8"
