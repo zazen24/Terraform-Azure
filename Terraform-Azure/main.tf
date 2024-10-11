@@ -95,6 +95,10 @@ resource "azurerm_role_assignment" "example" {
   principal_id   = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
   role_definition_name = data.azurerm_role_definition.example.name
   scope          = azurerm_virtual_network.virtual_network.id
+
+  depends_on = [
+    azurerm_kubernetes_cluster.aks_cluster
+  ]
 }
 
 output "aks_uai_appgw_object_id" {
