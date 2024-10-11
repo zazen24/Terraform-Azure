@@ -43,13 +43,13 @@ resource "azurerm_subnet" "AKS_subnet" {
   address_prefixes     = ["192.168.0.1/24"]
 }
 
-resource "azurerm_public_ip" "AKS_subnet" {
-  name                = "app-gateway-ip"
-  location            = azurerm_resource_group.ag-rg.location
-  resource_group_name = azurerm_resource_group.ag-rg.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
+# resource "azurerm_public_ip" "AKS_subnet" {
+#   name                = "app-gateway-ip"
+#   location            = azurerm_resource_group.ag-rg.location
+#   resource_group_name = azurerm_resource_group.ag-rg.name
+#   allocation_method   = "Static"
+#   sku                 = "Standard"
+# }
 
 
 resource "azurerm_container_registry" "acr" {
