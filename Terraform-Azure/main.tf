@@ -100,6 +100,7 @@ output "aks_uai_appgw_object_id" {
   value = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
 }
 
+
 # resource "azurerm_application_gateway" "network" {
 #   name                = "appgatewayfork8"
 #   resource_group_name = azurerm_resource_group.resource_group_AG.name
