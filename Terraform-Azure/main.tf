@@ -97,7 +97,7 @@ resource "azurerm_role_assignment" "example" {
   scope          = azurerm_virtual_network.virtual_network.id
 
   depends_on = [
-    azurerm_kubernetes_cluster.aks_cluster
+    azurerm_kubernetes_cluster.cluster
   ]
 }
 
