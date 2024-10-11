@@ -81,7 +81,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   ingress_application_gateway {
     gateway_name = "appgatewayfork8"
-    subnet_id    = azurerm_subnet.AG_subnet.id
+    subnet_id    = azurerm_subnet.AKS_subnet.id
   }
   
 }
