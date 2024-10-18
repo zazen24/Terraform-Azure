@@ -128,6 +128,12 @@ jobs:
     - name: Login to ACR
       run: az acr login --name DemooACRchet   
 
+    - name: Build and push Docker image
+      run: |
+        docker build ./fastapi -t storefront:v1 
+        docker tag storefront:v1 demooacrchet.azurecr.io/storefront:v1
+        docker push demooacrchet.azurecr.io/storefront:v1
+
    
     # - name: Deploy Application
     #   run: |
