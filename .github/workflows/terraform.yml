@@ -135,6 +135,12 @@ jobs:
         docker push demooacrchet.azurecr.io/storefront:v1
 
    
+    #Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
+    - name: Attach ACR to AKS cluster
+      run: |
+        az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
+
+        
     - name: Deploy Application
       run: |
         az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
@@ -145,8 +151,4 @@ jobs:
 
 
 
-    #Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
-    # - name: Attach ACR to AKS cluster
-    #   run: |
-    #     az aks update -n "learnk8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
     
