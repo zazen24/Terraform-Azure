@@ -70,7 +70,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   identity {
     type = "SystemAssigned"
   }
-
+}
 #   ingress_application_gateway {
 #     gateway_name = "appgatewayfork8"
 #     subnet_id    = azurerm_subnet.AG_subnet.id
