@@ -48,50 +48,50 @@ resource "azurerm_container_registry" "acr" {
 
 
 
-resource "azurerm_kubernetes_cluster" "cluster" {
-  name                = "k8scluster"
-  location            = azurerm_resource_group.resource_group_AKS.location
-  resource_group_name = azurerm_resource_group.resource_group_AKS.name
-  dns_prefix          = "learnk8scluster"
-  kubernetes_version = "1.29.2"
+# resource "azurerm_kubernetes_cluster" "cluster" {
+#   name                = "k8scluster"
+#   location            = azurerm_resource_group.resource_group_AKS.location
+#   resource_group_name = azurerm_resource_group.resource_group_AKS.name
+#   dns_prefix          = "learnk8scluster"
+#   kubernetes_version = "1.29.2"
   
 
-  default_node_pool {
-    name       = "default"
-    node_count = "1"
-    #vm_size    = "standard_d2_v2"
-    vm_size    = "standard_B2s"
-    vnet_subnet_id = azurerm_subnet.AKS_subnet.id
-  }
-  network_profile {
-    network_plugin    = "kubenet"
-    load_balancer_sku = "basic"
-  }
-  identity {
-    type = "SystemAssigned"
-  }
+#   default_node_pool {
+#     name       = "default"
+#     node_count = "1"
+#     #vm_size    = "standard_d2_v2"
+#     vm_size    = "standard_B2s"
+#     vnet_subnet_id = azurerm_subnet.AKS_subnet.id
+#   }
+#   network_profile {
+#     network_plugin    = "kubenet"
+#     load_balancer_sku = "basic"
+#   }
+#   identity {
+#     type = "SystemAssigned"
+#   }
 
-  ingress_application_gateway {
-    gateway_name = "appgatewayfork8"
-    subnet_id    = azurerm_subnet.AG_subnet.id
-  }
+#   ingress_application_gateway {
+#     gateway_name = "appgatewayfork8"
+#     subnet_id    = azurerm_subnet.AG_subnet.id
+#   }
   
-}
+# }
 
-data "azurerm_role_definition" "example" {
-  name = "Contributor"
-}
+# data "azurerm_role_definition" "example" {
+#   name = "Contributor"
+# }
 
-resource "azurerm_role_assignment" "example" {
-  principal_id   = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
-  role_definition_name = data.azurerm_role_definition.example.name
-  scope          = azurerm_virtual_network.virtual_network.id
+# resource "azurerm_role_assignment" "example" {
+#   principal_id   = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
+#   role_definition_name = data.azurerm_role_definition.example.name
+#   scope          = azurerm_virtual_network.virtual_network.id
 
-  depends_on = [
-    azurerm_kubernetes_cluster.cluster
-  ]
-}
+#   depends_on = [
+#     azurerm_kubernetes_cluster.cluster
+#   ]
+# }
 
-output "aks_uai_appgw_object_id" {
-  value = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
-}
+# output "aks_uai_appgw_object_id" {
+#   value = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
+# }
