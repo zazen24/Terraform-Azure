@@ -140,13 +140,13 @@ jobs:
       run: |
         az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
 
-        
+
     - name: Deploy Application
       run: |
         az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
         kubectl apply -f ./Deployapp/fastapi-store.yaml
         sleep 40
-        kubectl get service store-front
+        kubectl get service storefront-service
     #     rm -rf ~/.kube
 
 
