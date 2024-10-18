@@ -48,28 +48,28 @@ resource "azurerm_container_registry" "acr" {
 
 
 
-# resource "azurerm_kubernetes_cluster" "cluster" {
-#   name                = "k8scluster"
-#   location            = azurerm_resource_group.resource_group_AKS.location
-#   resource_group_name = azurerm_resource_group.resource_group_AKS.name
-#   dns_prefix          = "learnk8scluster"
-#   kubernetes_version = "1.29.2"
+resource "azurerm_kubernetes_cluster" "cluster" {
+  name                = "k8scluster"
+  location            = azurerm_resource_group.resource_group_AKS.location
+  resource_group_name = azurerm_resource_group.resource_group_AKS.name
+  dns_prefix          = "learnk8scluster"
+  kubernetes_version = "1.29.2"
   
 
-#   default_node_pool {
-#     name       = "default"
-#     node_count = "1"
-#     #vm_size    = "standard_d2_v2"
-#     vm_size    = "standard_B2s"
-#     vnet_subnet_id = azurerm_subnet.AKS_subnet.id
-#   }
-#   network_profile {
-#     network_plugin    = "kubenet"
-#     load_balancer_sku = "basic"
-#   }
-#   identity {
-#     type = "SystemAssigned"
-#   }
+  default_node_pool {
+    name       = "default"
+    node_count = "1"
+    #vm_size    = "standard_d2_v2"
+    vm_size    = "standard_B2s"
+    vnet_subnet_id = azurerm_subnet.AKS_subnet.id
+  }
+  network_profile {
+    network_plugin    = "kubenet"
+    load_balancer_sku = "basic"
+  }
+  identity {
+    type = "SystemAssigned"
+  }
 
 #   ingress_application_gateway {
 #     gateway_name = "appgatewayfork8"
