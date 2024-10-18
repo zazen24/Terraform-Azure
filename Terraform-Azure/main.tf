@@ -99,6 +99,7 @@ resource "azurerm_role_assignment" "example" {
   ]
 }
 
+
 output "aks_uai_appgw_object_id" {
   value = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
 }
