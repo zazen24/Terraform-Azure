@@ -11,7 +11,7 @@ resource "azurerm_key_vault_access_policy" "kvap_agentpool" {
   depends_on              = [module.az_keyvault]
   key_vault_id            = module.az_keyvault.keyvault_id
   tenant_id               = var.tenant_id   ##data.azurerm_client_config.current.tenant_id
-  object_id               = aks_uai_agentpool_object_id
+  object_id               = output.aks_uai_agentpool_object_id
   key_permissions         = ["Get"]
   secret_permissions      = ["Get"]
   certificate_permissions = ["Get"]
