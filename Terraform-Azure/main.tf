@@ -104,3 +104,13 @@ resource "azurerm_role_assignment" "example" {
 output "aks_uai_appgw_object_id" {
   value = azurerm_kubernetes_cluster.cluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
 }
+
+
+# Required for helm provider config.
+output "aks_config" { value = azurerm_kubernetes_cluster.cluster.kube_config }
+
+# Required to set access policy on key vault.
+output "aks_uai_agentpool_object_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id }
+
+# Required when setting up csi driver secret provier class.
+output "aks_uai_agentpool_client_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id }

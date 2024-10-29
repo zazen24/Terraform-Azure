@@ -10,8 +10,8 @@ module "az_keyvault" {
 resource "azurerm_key_vault_access_policy" "kvap_agentpool" {
   depends_on              = [module.az_keyvault]
   key_vault_id            = module.az_keyvault.keyvault_id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = module.az_aks.aks_uai_agentpool_object_id
+  tenant_id               = var.tenant_id   ##data.azurerm_client_config.current.tenant_id
+  object_id               = output.aks_uai_agentpool_object_id
   key_permissions         = ["Get"]
   secret_permissions      = ["Get"]
   certificate_permissions = ["Get"]
@@ -22,7 +22,7 @@ resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
   depends_on              = [module.az_keyvault]
   for_each                = { for my_kv in var.keyvault_policies : my_kv.access_policy_name => my_kv }
   key_vault_id            = module.az_keyvault.keyvault_id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
+  tenant_id               = var.tenant_id
   object_id               = each.value.object_id
   key_permissions         = try(each.value.key_permissions, [])
   secret_permissions      = try(each.value.secret_permissions, [])
