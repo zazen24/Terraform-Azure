@@ -187,3 +187,14 @@ output "aks_uai_agentpool_object_id" { value = azurerm_kubernetes_cluster.cluste
 # Required when setting up csi driver secret provier class.
 output "aks_uai_agentpool_client_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id }
 
+
+
+resource "helm_release" "akv2k8s" {
+  name             = "akv2k8s"
+  chart            = "akv2k8s"
+  version          = "2.5.0"
+  repository       = "https://charts.spvapi.no"
+  namespace        = "akv2k8s"
+  atomic           = true
+  create_namespace = true
+}
