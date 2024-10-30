@@ -114,7 +114,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: terraform apply -auto-approve 
+      run: terraform apply -auto-approve -no-color  -var "object_id=${{ secrets.AZURE_OBJECT_ID }}"
 
 
     # - name: Terraform output
