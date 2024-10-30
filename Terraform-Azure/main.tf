@@ -185,3 +185,4 @@ output "aks_uai_agentpool_object_id" { value = azurerm_kubernetes_cluster.cluste
 
 # Required when setting up csi driver secret provier class.
 output "aks_uai_agentpool_client_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id }
+
