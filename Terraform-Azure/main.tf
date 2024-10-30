@@ -176,7 +176,10 @@ output "aks_uai_appgw_object_id" {
 
 
 # Required for helm provider config.
-output "aks_config" { value = azurerm_kubernetes_cluster.cluster.kube_config }
+output "aks_config" { 
+  value = azurerm_kubernetes_cluster.cluster.kube_config 
+  sensitive = true
+  }
 
 # Required to set access policy on key vault.
 output "aks_uai_agentpool_object_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id }
