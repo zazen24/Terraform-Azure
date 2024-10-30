@@ -59,22 +59,22 @@ resource "azurerm_key_vault" "example" {
 
   sku_name = "standard"
 
-  access_policy {
-    tenant_id = var.tenant_id
-    object_id = c2b8e0f1-4dca-454a-8d88-d789bedaa56b
+  # access_policy {
+  #   tenant_id = var.tenant_id
+  #   object_id = c2b8e0f1-4dca-454a-8d88-d789bedaa56b
 
-    key_permissions = [
-      "Get",
-    ]
+  #   key_permissions = [
+  #     "Get",
+  #   ]
 
-    secret_permissions = [
-      "Get",
-    ]
+  #   secret_permissions = [
+  #     "Get",
+  #   ]
 
-    storage_permissions = [
-      "Get",
-    ]
-  }
+  #   storage_permissions = [
+  #     "Get",
+  #   ]
+  # }
 }
 
 
