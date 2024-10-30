@@ -12,3 +12,4 @@ variable "object_id" {
   description = "The Object ID for the resource"
   type        = string
 }
+
