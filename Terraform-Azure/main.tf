@@ -77,7 +77,6 @@ resource "azurerm_key_vault" "example" {
   # }
 }
 
-
 # resource "azurerm_kubernetes_cluster" "cluster" {
 #   name                = "k8scluster"
 #   location            = azurerm_resource_group.resource_group_AKS.location
