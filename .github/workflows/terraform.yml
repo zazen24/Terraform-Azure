@@ -141,8 +141,6 @@ jobs:
     #     az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
 
 
-
-
     - name: Deploy Application
       run: |
         az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
