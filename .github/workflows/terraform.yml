@@ -57,6 +57,7 @@ jobs:
       #if: github.event_name == 'pull_request'
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
     
+    
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
