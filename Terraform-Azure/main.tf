@@ -46,76 +46,9 @@ resource "azurerm_container_registry" "acr" {
   admin_enabled       = false
 }
 
-data "azurerm_client_config" "current" {
-}
+data "azurerm_client_config" "current" {}
 
 
-
-resource "azurerm_key_vault" "example" {
-  name                        = "examplekeyvaultchet"
-  location                    = azurerm_resource_group.rg.location
-  resource_group_name         = azurerm_resource_group.rg.name
-  enabled_for_disk_encryption = true
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
-
-  sku_name = "standard"
-
-  access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
-
-    key_permissions = [
-      "Get",
-    ]
-
-    secret_permissions = [
-      "Get",
-    ]
-
-    storage_permissions = [
-      "Get",
-    ]
-  }
-}
-
-
-
-# Create keyvault access policies for your user account and the terraform service principal.
-resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
-  key_vault_id            = azurerm_key_vault.example.id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = data.azurerm_client_config.current.object_id
-  key_permissions = [
-    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
-  ]
-
-  secret_permissions = [
-     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-    ]
-
-  certificate_permissions = [
-   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
-  ]
-}
-
-resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
-  key_vault_id            = azurerm_key_vault.example.id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
-  key_permissions = [
-    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
-  ]
-
-  secret_permissions = [
-     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-    ]
-
-  certificate_permissions = [
-   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
-  ]
-}
 
 
 resource "azurerm_kubernetes_cluster" "cluster" {
@@ -147,6 +80,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
   
 }
+
 
 resource "azurerm_role_assignment" "example-acr" {
   principal_id                     = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
@@ -188,6 +122,76 @@ output "aks_uai_agentpool_object_id" { value = azurerm_kubernetes_cluster.cluste
 output "aks_uai_agentpool_client_id" { value = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id }
 
 
+
+resource "azurerm_key_vault" "example" {
+  name                        = "examplekeyvaultchet"
+  location                    = azurerm_resource_group.rg.location
+  resource_group_name         = azurerm_resource_group.rg.name
+  enabled_for_disk_encryption = true
+  tenant_id                   = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
+
+  sku_name = "standard"
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
+
+    key_permissions = [
+      "Get",
+    ]
+
+    secret_permissions = [
+      "Get",
+    ]
+
+    storage_permissions = [
+      "Get",
+    ]
+  }
+
+  depends_on = [
+    azurerm_kubernetes_cluster.cluster
+  ]
+}
+
+
+
+# Create keyvault access policies for your user account and the terraform service principal.
+resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
+  key_vault_id            = azurerm_key_vault.example.id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = data.azurerm_client_config.current.object_id
+  key_permissions = [
+    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
+  ]
+
+  secret_permissions = [
+     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
+    ]
+
+  certificate_permissions = [
+   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
+  key_vault_id            = azurerm_key_vault.example.id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
+  key_permissions = [
+    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
+  ]
+
+  secret_permissions = [
+     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
+    ]
+
+  certificate_permissions = [
+   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
+  ]
+}
 
 resource "helm_release" "akv2k8s" {
   name             = "akv2k8s"
