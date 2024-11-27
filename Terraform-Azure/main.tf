@@ -146,7 +146,7 @@ resource "azurerm_key_vault" "example" {
       "Get",
     ]
 
-    storage_permissions = [
+    certificate_permissions = [
       "Get",
     ]
   }
