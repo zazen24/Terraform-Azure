@@ -21,6 +21,7 @@ __pycache__/
 
 # Ignore virtual environment
 venv/
+.venv/
 
 # Ignore environment-specific configurations
 .env
