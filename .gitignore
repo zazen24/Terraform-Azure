@@ -15,9 +15,15 @@ crash.*.log
 # to change depending on the environment.
 *.tfvars
 *.tfvars.json
-.venv
-venv
+ Ignore Python bytecode files
+__pycache__/
+*.pyc
 
+# Ignore virtual environment
+venv/
+
+# Ignore environment-specific configurations
+.env
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
