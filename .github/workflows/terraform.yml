@@ -137,6 +137,7 @@ jobs:
 
    
 
+
     #Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
     # - name: Attach ACR to AKS cluster
     #   run: |
@@ -150,7 +151,7 @@ jobs:
         sleep 40
         kubectl get service storefront-service
     #     rm -rf ~/.kube
-
+    #run again
 
 
     
