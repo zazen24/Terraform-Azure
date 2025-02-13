@@ -212,33 +212,33 @@ resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
 }
 
 
-resource "helm_release" "secrets-store-csi" {
-  name       = "secrets-store-csi-driver"
-  namespace  = "kube-system"
-  repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-  chart      = "secrets-store-csi-driver"
-  #version    = "0.0.18"
-}
+# resource "helm_release" "secrets-store-csi" {
+#   name       = "secrets-store-csi-driver"
+#   namespace  = "kube-system"
+#   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+#   chart      = "secrets-store-csi-driver"
+#   #version    = "0.0.18"
+# }
 
 
-resource "helm_release" "azure-keyvault-provider" {
-  name       = "secrets-store-azure-provider"
-  namespace  = "kube-system"
-  repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
-  chart      = "csi-secrets-store-provider-azure"
-  #version    = "0.1.0"
-}
+# resource "helm_release" "azure-keyvault-provider" {
+#   name       = "secrets-store-azure-provider"
+#   namespace  = "kube-system"
+#   repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
+#   chart      = "csi-secrets-store-provider-azure"
+#   #version    = "0.1.0"
+# }
 
 
 
-resource "helm_release" "akv2k8s" {
-  name             = "akv2k8s"
-  chart            = "akv2k8s"
-  version          = "2.5.0"
-  repository       = "https://charts.spvapi.no"
-  namespace        = "akv2k8s"
-  atomic           = true
-  create_namespace = true
+# resource "helm_release" "akv2k8s" {
+#   name             = "akv2k8s"
+#   chart            = "akv2k8s"
+#   version          = "2.5.0"
+#   repository       = "https://charts.spvapi.no"
+#   namespace        = "akv2k8s"
+#   atomic           = true
+#   create_namespace = true
 }
 
 
