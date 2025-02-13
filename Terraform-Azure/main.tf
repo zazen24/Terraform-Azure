@@ -156,23 +156,23 @@ resource "azurerm_key_vault" "example" {
   ]
 }
 
-resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
-  key_vault_id            = azurerm_key_vault.example.id
-  tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
-  key_permissions = [
-     "Get"
-  ]
+# resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
+#   key_vault_id            = azurerm_key_vault.example.id
+#   tenant_id               = data.azurerm_client_config.current.tenant_id
+#   object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
+#   key_permissions = [
+#      "Get"
+#   ]
 
-  secret_permissions = [
-     "Get"
-    ]
+#   secret_permissions = [
+#      "Get"
+#     ]
 
 
-  certificate_permissions = [
-   "Get"
-  ]
-}
+#   certificate_permissions = [
+#    "Get"
+#   ]
+# }
 
 # Create keyvault access policies for your user account and the terraform service principal.
 resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
