@@ -201,6 +201,7 @@ resource "helm_release" "secrets-store-csi" {
   #version    = "0.0.18"
 }
 
+
 resource "helm_release" "azure-keyvault-provider" {
   name       = "secrets-store-azure-provider"
   namespace  = "kube-system"
