@@ -193,6 +193,7 @@ resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
   ]
 }
 
+
 resource "helm_release" "secrets-store-csi" {
   name       = "secrets-store-csi-driver"
   namespace  = "kube-system"
