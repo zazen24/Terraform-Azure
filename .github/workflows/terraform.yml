@@ -119,7 +119,6 @@ jobs:
       ##run: terraform apply -auto-approve -var "object_id=${{ secrets.AZURE_OBJECT_ID }}"
 
 
-      
     # - name: Terraform output
     #   run: terraform output
     - name: 'Az CLI login'
