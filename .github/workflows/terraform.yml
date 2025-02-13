@@ -131,7 +131,7 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build ./fastapi -t storefront:v1 
+        docker build --no-cache ./fastapi -t storefront:v1 
         docker tag storefront:v1 demooacrchet.azurecr.io/storefront:v1
         docker push demooacrchet.azurecr.io/storefront:v1
 
