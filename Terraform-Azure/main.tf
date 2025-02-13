@@ -205,7 +205,7 @@ resource "helm_release" "azure-keyvault-provider" {
   name       = "secrets-store-azure-provider"
   namespace  = "kube-system"
   repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
-  chart      = "secrets-store-provider-azure"
+  chart      = "csi-secrets-store-provider-azure"
   #version    = "0.1.0"
 }
 
