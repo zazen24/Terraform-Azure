@@ -239,6 +239,6 @@ resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
 #   namespace        = "akv2k8s"
 #   atomic           = true
 #   create_namespace = true
-}
+#}
 
 
