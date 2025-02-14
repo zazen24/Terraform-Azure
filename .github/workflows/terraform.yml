@@ -137,27 +137,27 @@ jobs:
         docker push demooacrchet.azurecr.io/storefront:v1
 
 
-    #Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
-    # - name: Attach ACR to AKS cluster
-    #   run: |
-    #     az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
+    Below code does not wotk as az login above is accomplished using service principal and service principal cannot be used for role assignment.
+    - name: Attach ACR to AKS cluster
+      run: |
+        az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
 
-    # - name: Add Secrets to Key Vault
-    #   run: |
-    #     az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-HOST --value ${{ secrets.DB_HOST }}
-    #     az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-USER --value ${{ secrets.DB_USERNAME }}
-    #     az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PASSWORD --value ${{ secrets.DB_PASSWORD }}
-    #     az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
+    - name: Add Secrets to Key Vault
+      run: |
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-HOST --value ${{ secrets.DB_HOST }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-USER --value ${{ secrets.DB_USERNAME }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PASSWORD --value ${{ secrets.DB_PASSWORD }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
 
 
-    # - name: Deploy Application
-    #   run: |
-    #     az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
-    #     kubectl apply -f ./Deployapp/fastapi-store.yaml
-    #     sleep 40
-    #     kubectl get service storefront-service
-    # #     rm -rf ~/.kube
-    # #run again
+    - name: Deploy Application
+      run: |
+        az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
+        kubectl apply -f ./Deployapp/fastapi-store.yaml
+        sleep 40
+        kubectl get service storefront-service
+    #     rm -rf ~/.kube
+    #run again
 
 
     

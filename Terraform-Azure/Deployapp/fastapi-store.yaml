@@ -9,7 +9,7 @@ spec:
     usePodIdentity: "false"
     useVMManagedIdentity: "true"  # Use true if AKS has a managed identity
     keyvaultName: "examplekeyvaultchet"
-    userAssignedIdentityID: "f6a3ce6c-ab3f-4eed-b64c-8409d41c095d"
+    userAssignedIdentityID: "ffaa126e-b409-4e43-b5c5-f84c8196449e"
     tenantId: "4e37dd6c-1a79-455c-a123-64050ce2a125"
     objects: |
       array:
@@ -85,7 +85,7 @@ spec:
       port: 80
       targetPort: 8000
   type: LoadBalancer
-  
+
 ---
 # INGRESS
 # Browse to http://[public_ip]

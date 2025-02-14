@@ -156,80 +156,80 @@ resource "azurerm_key_vault" "example" {
   ]
 }
 
-# resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
-#   key_vault_id            = azurerm_key_vault.example.id
-#   tenant_id               = data.azurerm_client_config.current.tenant_id
-#   object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
-#   #object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id 
-#   key_permissions = [
-#      "Get"
-#   ]
+resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
+  key_vault_id            = azurerm_key_vault.example.id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
+  #object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].client_id 
+  key_permissions = [
+     "Get"
+  ]
 
-#   secret_permissions = [
-#      "Get"
-#     ]
-
-
-#   certificate_permissions = [
-#    "Get"
-#   ]
-# }
-
-# # Create keyvault access policies for your user account and the terraform service principal.
-# resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
-#   key_vault_id            = azurerm_key_vault.example.id
-#   tenant_id               = data.azurerm_client_config.current.tenant_id
-#   object_id               = data.azurerm_client_config.current.object_id
-#   key_permissions = [
-#     "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
-#   ]
-
-#   secret_permissions = [
-#      "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-#     ]
+  secret_permissions = [
+     "Get"
+    ]
 
 
-#   certificate_permissions = [
-#    "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
-#   ]
-# }
+  certificate_permissions = [
+   "Get"
+  ]
+}
 
-# resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
-#   key_vault_id            = azurerm_key_vault.example.id
-#   tenant_id               = data.azurerm_client_config.current.tenant_id
-#   #object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
-#   object_id               = "104d6304-b6da-4099-9e44-faeb73887383"
-#   key_permissions = [
-#     "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
-#   ]
+# Create keyvault access policies for your user account and the terraform service principal.
+resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
+  key_vault_id            = azurerm_key_vault.example.id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  object_id               = data.azurerm_client_config.current.object_id
+  key_permissions = [
+    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
+  ]
 
-
-#   secret_permissions = [
-#      "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
-#     ]
-
-#   certificate_permissions = [
-#    "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
-#   ]
-# }
+  secret_permissions = [
+     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
+    ]
 
 
-# # resource "helm_release" "secrets-store-csi" {
-# #   name       = "secrets-store-csi-driver"
-# #   namespace  = "kube-system"
-# #   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-# #   chart      = "secrets-store-csi-driver"
-# #   #version    = "0.0.18"
-# # }
+  certificate_permissions = [
+   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
+  key_vault_id            = azurerm_key_vault.example.id
+  tenant_id               = data.azurerm_client_config.current.tenant_id
+  #object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
+  object_id               = "104d6304-b6da-4099-9e44-faeb73887383"
+  key_permissions = [
+    "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
+  ]
 
 
-# resource "helm_release" "azure-keyvault-provider" {
-#   name       = "secrets-store-azure-provider"
+  secret_permissions = [
+     "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
+    ]
+
+  certificate_permissions = [
+   "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
+  ]
+}
+
+
+# resource "helm_release" "secrets-store-csi" {
+#   name       = "secrets-store-csi-driver"
 #   namespace  = "kube-system"
-#   repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
-#   chart      = "csi-secrets-store-provider-azure"
-#   #version    = "0.1.0"
+#   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+#   chart      = "secrets-store-csi-driver"
+#   #version    = "0.0.18"
 # }
+
+
+resource "helm_release" "azure-keyvault-provider" {
+  name       = "secrets-store-azure-provider"
+  namespace  = "kube-system"
+  repository = "https://azure.github.io/secrets-store-csi-driver-provider-azure/charts"
+  chart      = "csi-secrets-store-provider-azure"
+  #version    = "0.1.0"
+}
 
 
 
