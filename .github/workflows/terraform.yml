@@ -142,6 +142,13 @@ jobs:
     #   run: |
     #     az aks update -n "k8scluster" -g "AKS-ResourceGroup" --attach-acr "DemooACRchet"
 
+    - name: Add Secrets to Key Vault
+      run: |
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-HOST --value ${{ secrets.DB_HOST }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-USER --value ${{ secrets.DB_USERNAME }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PASSWORD --value ${{ secrets.DB_PASSWORD }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
+
 
     - name: Deploy Application
       run: |
