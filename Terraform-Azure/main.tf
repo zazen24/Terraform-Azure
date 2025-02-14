@@ -196,7 +196,8 @@ resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
 resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
   key_vault_id            = azurerm_key_vault.example.id
   tenant_id               = data.azurerm_client_config.current.tenant_id
-  object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
+  #object_id               = "838c97c6-2878-4b2d-9895-22901819b75e"
+  object_id               = "104d6304-b6da-4099-9e44-faeb73887383"
   key_permissions = [
     "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey", "Release", "Rotate", "GetRotationPolicy", "SetRotationPolicy"
   ]
