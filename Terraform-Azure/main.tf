@@ -213,13 +213,13 @@ resource "azurerm_key_vault_access_policy" "kvap_admin_users" {
 }
 
 
-resource "helm_release" "secrets-store-csi" {
-  name       = "secrets-store-csi-driver"
-  namespace  = "kube-system"
-  repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-  chart      = "secrets-store-csi-driver"
-  #version    = "0.0.18"
-}
+# resource "helm_release" "secrets-store-csi" {
+#   name       = "secrets-store-csi-driver"
+#   namespace  = "kube-system"
+#   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+#   chart      = "secrets-store-csi-driver"
+#   #version    = "0.0.18"
+# }
 
 
 resource "helm_release" "azure-keyvault-provider" {
