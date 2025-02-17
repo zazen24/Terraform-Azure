@@ -51,6 +51,8 @@ data "azurerm_client_config" "current" {}
 
 
 
+
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name                = "k8scluster"
   location            = azurerm_resource_group.resource_group_AKS.location
