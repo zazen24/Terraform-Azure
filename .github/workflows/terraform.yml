@@ -149,6 +149,13 @@ jobs:
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PASSWORD --value ${{ secrets.DB_PASSWORD }}
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
 
+    - name: Fetch Client ID and Update YAML
+      run: |
+        # Fetch the client ID
+        CLIENT_ID=$(az aks show -n k8scluster -g AKS-ResourceGroup  --query "identityProfile.kubeletidentity.clientId" -o tsv)
+
+        sed -i "s/userAssignedIdentityID:.*/userAssignedIdentityID: \"$CLIENT_ID\"/" ./Deployapp/fast-api-store.yml
+
 
     - name: Deploy Application
       run: |

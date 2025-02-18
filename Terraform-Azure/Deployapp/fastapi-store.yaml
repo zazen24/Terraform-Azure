@@ -9,7 +9,7 @@ spec:
     usePodIdentity: "false"
     useVMManagedIdentity: "true"  # Use true if AKS has a managed identity
     keyvaultName: "examplekeyvaultchet"
-    #userAssignedIdentityID: "ffaa126e-b409-4e43-b5c5-f84c8196449e"
+    userAssignedIdentityID: "ffaa126e-b409-4e43-b5c5-f84c8196449e"
     tenantId: "4e37dd6c-1a79-455c-a123-64050ce2a125"
     objects: |
       array:
