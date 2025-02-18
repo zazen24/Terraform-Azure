@@ -150,28 +150,21 @@ jobs:
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
 
 
-    - name : Debug_step
+
+    - name: Fetch Client ID and Update YAML
       run: |
-        echo "Current working directory: $(pwd)"
-        echo "Listing files in ./Deployapp/:"
-        ls -l ./Deployapp/
-        echo "Contents of fastapi-store.yaml:"
-        cat ./Deployapp/fastapi-store.yaml
+        # Fetch the client ID
+        CLIENT_ID=$(az aks show -n k8scluster -g AKS-ResourceGroup  --query "identityProfile.kubeletidentity.clientId" -o tsv)
 
-    # - name: Fetch Client ID and Update YAML
-    #   run: |
-    #     # Fetch the client ID
-    #     CLIENT_ID=$(az aks show -n k8scluster -g AKS-ResourceGroup  --query "identityProfile.kubeletidentity.clientId" -o tsv)
-
-    #     sed -i "s/userAssignedIdentityID:.*/userAssignedIdentityID: \"$CLIENT_ID\"/" ./Deployapp/fast-api-store.yml
+        sed -i "s/userAssignedIdentityID:.*/userAssignedIdentityID: \"$CLIENT_ID\"/" ./Deployapp/fastapi-store.yml
 
 
-    # - name: Deploy Application
-    #   run: |
-    #     az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
-    #     kubectl apply -f ./Deployapp/fastapi-store.yaml
-    #     sleep 40
-    #     kubectl get service storefront-service
+    - name: Deploy Application
+      run: |
+        az aks get-credentials -n "k8scluster" -g "AKS-ResourceGroup"
+        kubectl apply -f ./Deployapp/fastapi-store.yaml
+        sleep 40
+        kubectl get service storefront-service
     
 
 
