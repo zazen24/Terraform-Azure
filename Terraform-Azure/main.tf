@@ -133,23 +133,7 @@ resource "azurerm_key_vault" "example" {
 
   sku_name = "standard"
 
-  # access_policy {
-  #   tenant_id = data.azurerm_client_config.current.tenant_id
-  #   object_id = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
-
-  #   key_permissions = [
-  #     "Get",
-  #   ]
-
-  #   secret_permissions = [
-  #     "Get",
-  #   ]
-
-  #   certificate_permissions = [
-  #     "Get",
-  #   ]
-  # }
-
+ 
   depends_on = [
     azurerm_kubernetes_cluster.cluster
   ]
@@ -159,7 +143,7 @@ resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
   key_vault_id            = azurerm_key_vault.example.id
   tenant_id               = data.azurerm_client_config.current.tenant_id
   object_id               = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id 
-  #object_id               =  azurerm_kubernetes_cluster.cluster.identity[0].principal_id
+  ### client_id for AKS will be provided while applying configuration of SecretServiceClass ###
   key_permissions = [
      "Get"
   ]
@@ -230,6 +214,8 @@ resource "azurerm_key_vault_access_policy" "admin_users" {
   ]
 }
 
+
+###### You dont need to add secret-store-csi chart its all included in azure keyvault provider ####
 # resource "helm_release" "secrets-store-csi" {
 #   name       = "secrets-store-csi-driver"
 #   namespace  = "kube-system"
@@ -249,14 +235,14 @@ resource "helm_release" "azure-keyvault-provider" {
 
 
 
-# resource "helm_release" "akv2k8s" {
-#   name             = "akv2k8s"
-#   chart            = "akv2k8s"
-#   version          = "2.5.0"
-#   repository       = "https://charts.spvapi.no"
-#   namespace        = "akv2k8s"
-#   atomic           = true
-#   create_namespace = true
-#}
+resource "helm_release" "akv2k8s" {
+  name             = "akv2k8s"
+  chart            = "akv2k8s"
+  version          = "2.5.0"
+  repository       = "https://charts.spvapi.no"
+  namespace        = "akv2k8s"
+  atomic           = true
+  create_namespace = true
+}
 
 
