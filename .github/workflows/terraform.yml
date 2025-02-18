@@ -155,8 +155,8 @@ jobs:
         echo "Current working directory: $(pwd)"
         echo "Listing files in ./Deployapp/:"
         ls -l ./Deployapp/
-        echo "Contents of fast-api-store.yaml:"
-        cat ./Deployapp/fast-api-store.yaml
+        echo "Contents of fastapi-store.yaml:"
+        cat ./Deployapp/fastapi-store.yaml
 
     # - name: Fetch Client ID and Update YAML
     #   run: |
