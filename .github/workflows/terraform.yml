@@ -156,7 +156,7 @@ jobs:
         # Fetch the client ID
         CLIENT_ID=$(az aks show -n k8scluster -g AKS-ResourceGroup  --query "identityProfile.kubeletidentity.clientId" -o tsv)
 
-        sed -i "s/userAssignedIdentityID:.*/userAssignedIdentityID: \"$CLIENT_ID\"/" ./Deployapp/fastapi-store.yml
+        sed -i "s/userAssignedIdentityID:.*/userAssignedIdentityID: \"$CLIENT_ID\"/" ./Deployapp/fastapi-store.yaml
 
 
     - name: Deploy Application
