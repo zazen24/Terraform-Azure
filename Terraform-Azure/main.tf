@@ -195,7 +195,7 @@ resource "azurerm_key_vault_access_policy" "az_login" {
    "Backup", "Create", "Delete", "DeleteIssuers", "Get", "GetIssuers", "Import", "List", "ListIssuers", "ManageContacts", "ManageIssuers", "Purge", "Recover", "Restore", "SetIssuers", "Update"
   ]
 }
-
+   
 resource "azurerm_key_vault_access_policy" "admin_users" {
   key_vault_id            = azurerm_key_vault.example.id
   tenant_id               = data.azurerm_client_config.current.tenant_id
