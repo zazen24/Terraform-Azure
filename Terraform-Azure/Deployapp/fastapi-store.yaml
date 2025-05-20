@@ -25,6 +25,9 @@ spec:
         - |
           objectName: "POSTGRES-DB"
           objectType: secret
+        - |
+          objectName: "POSTGRES-PORT"
+          objectType: secret
   #mountSecretsStoreObject: true
 ---  
 apiVersion: apps/v1
