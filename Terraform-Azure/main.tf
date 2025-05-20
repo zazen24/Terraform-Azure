@@ -67,7 +67,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
   network_profile {
     network_plugin    = "azure"
-    load_balancer_sku = "basic"
+    network_plugin_mode = "overlay"
+    pod_cidr = "10.10.0.0/24"
+    #load_balancer_sku = "basic"
   }
   identity {
     type = "SystemAssigned"
