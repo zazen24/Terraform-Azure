@@ -148,6 +148,7 @@ jobs:
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-USER --value ${{ secrets.DB_USERNAME }}
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PASSWORD --value ${{ secrets.DB_PASSWORD }}
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
+        az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PORT --value ${{ secrets.DB_PORT }}
     
     - name: Wait for 5 minutes
       run: sleep 300

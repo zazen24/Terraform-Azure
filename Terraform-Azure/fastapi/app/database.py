@@ -17,8 +17,11 @@ with open('/etc/secrets/POSTGRES-PASSWORD', 'r') as f:
 with open('/etc/secrets/POSTGRES-DB', 'r') as f:
     postgres_db = f.read().strip()
 
+with open('/etc/secrets/POSTGRES-PORT', 'r') as f:
+    postgres_port = f.read().strip()
+
 # Construct the SQLAlchemy Database URL dynamically
-SQLALCHEMY_DATABASE_URL = f"postgresql://{postgres_user}:{postgres_password}@{postgres_host}/{postgres_db}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}"
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
