@@ -66,10 +66,12 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     vnet_subnet_id = azurerm_subnet.AKS_subnet.id
   }
   network_profile {
-    network_plugin    = "azure"
-    network_plugin_mode = "overlay"
-    pod_cidr = "10.10.0.0/24"
+    network_plugin    = "kubenet"
+    # network_plugin    = "azure"
+    # network_plugin_mode = "overlay"
+    # pod_cidr = "10.10.0.0/24"
     #load_balancer_sku = "basic"
+    outbound_type       = "loadBalancer"
   }
   identity {
     type = "SystemAssigned"
