@@ -28,7 +28,7 @@ spec:
         - |
           objectName: "POSTGRES-PORT"
           objectType: secret
-       -  |
+        - |
           objectName: "devopscloud"
           objectType: certificate
   #mountSecretsStoreObject: true
