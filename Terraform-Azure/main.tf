@@ -162,6 +162,7 @@ resource "azurerm_key_vault_access_policy" "kubernetes_cluster" {
   ]
 }
 
+
 # Create keyvault access policies for your user account and the terraform service principal.
 resource "azurerm_key_vault_access_policy" "kvap_service_principal" {
   key_vault_id            = azurerm_key_vault.example.id
