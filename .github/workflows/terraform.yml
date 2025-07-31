@@ -150,8 +150,8 @@ jobs:
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-DB --value ${{ secrets.DB_NAME }}
         az keyvault secret set --vault-name examplekeyvaultchet --name POSTGRES-PORT --value ${{ secrets.DB_PORT }}
     
-    - name: Wait for 2 minutes
-      run: sleep 120
+    - name: Wait for 4 minutes
+      run: sleep 240
 
 
     - name: Fetch Client ID and Update YAML
